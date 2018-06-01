@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Aluno Online</string>
+    <string name="email_blank">Email em branco!</string>
+    <string name="password_blank">Senha em branco!</string>
+    <string name="password_conf_blank">Confirmação de senha em branco!</string>
+    <string name="recover_password">Recuperar Senha</string>
+    <string name="create_account">Cadastre-se</string>
+    <string name="login_button">Entrar</string>
+    <string name="recover_button">Recuperar</string>
+    <string name="save_button">Salvar</string>
+    <string name="txt_name">Nome</string>
+    <string name="txt_registration">Matricula</string>
+    <string name="txt_phone">Telefone</string>
+    <string name="txt_login">Login</string>
+    <string name="txt_register">Cadastrar</string>
+    <string name="txt_email">Email</string>
+    <string name="txt_confirm_email">Confirmar Email</string>
+    <string name="txt_password">Senha</string>
+    <string name="txt_confirm_password">Confirmar Senha</string>
+    <string name="img_logo">Logo</string>
+</resources>
