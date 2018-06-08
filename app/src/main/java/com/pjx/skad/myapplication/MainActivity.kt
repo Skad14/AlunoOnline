@@ -1,18 +1,28 @@
 package com.pjx.skad.myapplication
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import android.text.TextUtils
+import android.util.Log
+import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    private var mAuth: FirebaseAuth? = null
+    private var email: String? = null
+    private var password: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        mAuth = FirebaseAuth.getInstance()
+
         loginButton.setOnClickListener {
-            validateLogin()
+            loginUser()
         }
 
         registerText.setOnClickListener {
@@ -26,25 +36,28 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun validateLogin() {
+    private fun loginUser() {
+        email = inputEmail.text.toString()
+        password = inputPassword.text.toString()
 
-        if (inputEmail.text.isEmpty()) {
-            txtInputEmail.isErrorEnabled = true
-            txtInputEmail.error = getString(R.string.email_blank)
+        if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
+            mAuth!!.signInWithEmailAndPassword(email!!, password!!)
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            updateUI()
+                        } else {
+                            Toast.makeText(this@MainActivity, "Erro na autenticação.",
+                                    Toast.LENGTH_SHORT).show()
+                        }
+                    }
         } else {
-            txtInputEmail.isErrorEnabled = false
+            Toast.makeText(this, "Preencha todos os dados", Toast.LENGTH_SHORT).show()
         }
+    }
 
-        if (inputPassword.text.isEmpty()) {
-            txtInputPassword.isErrorEnabled = true
-            txtInputPassword.error = getString(R.string.password_blank)
-        } else {
-            txtInputPassword.isErrorEnabled = false
-        }
-
-        if(!txtInputEmail.isErrorEnabled && !txtInputPassword.isErrorEnabled) {
-            var newsIntent = Intent(this, NewsActivity::class.java)
-            startActivity(newsIntent)
-        }
+    private fun updateUI() {
+        val intent = Intent(this@MainActivity, NewsActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        startActivity(intent)
     }
 }
