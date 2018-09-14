@@ -71,19 +71,22 @@ class ProfileActivity : AppCompatActivity() {
                 .addOnSuccessListener {
                     ref.downloadUrl
                             .addOnSuccessListener {
-                        saveUserToFireDatabase(it.toString())
+                        //saveUserToFireDatabase(it.toString())
                     }
                 }
     }
 
-    private fun saveUserToFireDatabase(profileImageUrl: String) {
+    /*private fun saveUserToFireDatabase(profileImageUrl: String) {
         val uid = FirebaseAuth.getInstance().uid ?: ""
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
 
-        //val user = User(uid, profileName.text.toString(), profileImageUrl)
+        val user = User(uid, profileName.text.toString(), pri profileImageUrl)
 
-        //ref.setValue(user)
-    }
+        ref.setValue(user)
+                .addOnSuccessListener {
+                    val intent = Intent(this, NewsActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
+                }
+    }*/
 }
-
-//class User(val uid: String, val username, val profileImageUrl: String)
