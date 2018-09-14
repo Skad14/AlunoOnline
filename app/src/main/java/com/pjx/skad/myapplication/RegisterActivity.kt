@@ -41,7 +41,7 @@ class RegisterActivity : AppCompatActivity() {
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                                 startActivity(intent)
                             } else {
-                                Toast.makeText(this@RegisterActivity, "Erro de autenticação.",
+                                Toast.makeText(this@RegisterActivity, "Erro de cadastro.",
                                         Toast.LENGTH_SHORT).show()
                             }
                         }
